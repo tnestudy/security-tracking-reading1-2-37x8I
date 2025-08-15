@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Test I - Reading Part 1: Reading Correspondence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+
+
+        /* Logo */
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e1e5e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main Container */
+        .main-wrapper {
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .test-container {
+            width: 1200px;
+            height: 1568px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e1e5e9;
+            position: relative;
+        }
+
+        .header {
+            background-color: #e8f4fd;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            height: 60px;
+        }
+
+        .header-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .timer-next {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .timer {
+            color: #666;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .next-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .next-button:hover {
+            background-color: #0056b3;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .left-panel {
+            flex: 0.47;
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+        }
+
+        .right-panel {
+            flex: 0.53;
+            background-color: white;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .info-icon {
+            background-color: #007bff;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            margin-right: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .reading-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .question-section {
+            margin-bottom: 40px;
+        }
+
+        .question {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .question-number {
+            font-weight: 600;
+            margin-right: 10px;
+            min-width: 20px;
+            font-size: 16px;
+        }
+
+        .question-text {
+            flex: 1;
+            font-size: 16px;
+        }
+
+        .dropdown {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            margin-left: 10px;
+            min-width: 150px;
+            font-size: 16px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            padding-right: 30px;
+        }
+
+        .response-text {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            line-height: 2.4;
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-align: left;
+            word-spacing: normal;
+        }
+
+        /* Widen dropdown for question 11 */
+        #q11 {
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        /* Widen dropdown for question 6 */
+        #q6 {
+            min-width: 280px;
+            max-width: 350px;
+        }
+
+        .blank-dropdown {
+            padding: 2px 6px;
+            border: 1px solid #007bff;
+            border-radius: 3px;
+            background-color: white;
+            margin: 0 2px;
+            min-width: 180px;
+            max-width: 320px;
+            font-size: 14px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='7,10 12,15 17,10'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 4px center;
+            background-size: 10px;
+            padding-right: 20px;
+            white-space: nowrap;
+            vertical-align: baseline;
+            line-height: 1.2;
+            height: 28px;
+            position: relative;
+            top: 0.1em;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .selected-answer {
+            color: #2d5a2d;
+            font-weight: bold;
+            text-decoration: underline;
+            background: none;
+            border: 2px solid transparent;
+            border-radius: 3px;
+            padding: 2px 4px;
+            margin: 0 2px;
+            font-size: 18px;
+            vertical-align: baseline;
+            line-height: 1.5;
+            position: relative;
+            top: 0.1em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .selected-answer:hover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+
+        .selected-answer.editing {
+            border-color: #007bff;
+            background-color: #e8f4fd;
+        }
+
+
+
+        .dropdown-group {
+            display: inline;
+            white-space: nowrap;
+        }
+
+        .bottom-buttons {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+
+
+        .results {
+            background-color: #e8f4fd;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            display: none;
+            font-size: 16px;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        /* Remove default dropdown arrow for IE */
+        .dropdown::-ms-expand,
+        .blank-dropdown::-ms-expand,
+        .product-dropdown::-ms-expand {
+            display: none;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .logo-container {
+                position: static;
+                top: auto;
+                left: auto;
+                width: 100%;
+                text-align: center;
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 0;
+                background-color: white;
+                border-bottom: 1px solid #e1e5e9;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .logo-container img {
+                max-width: 120px !important;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .main-wrapper {
+                padding: 15px 10px;
+                min-height: 100vh;
+            }
+
+            .test-container {
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                min-height: calc(100vh - 30px);
+                margin: 0;
+                border-radius: 8px;
+            }
+
+            .header {
+                padding: 12px 15px;
+                flex-direction: column;
+                height: auto;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .header-title {
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .timer-next {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .timer {
+                font-size: 14px;
+            }
+
+            .next-button {
+                padding: 12px 24px;
+                font-size: 16px;
+                border-radius: 6px;
+                min-width: 80px;
+            }
+
+            .content {
+                padding: 15px;
+                flex: 1;
+                overflow-y: auto;
+                display: block;
+            }
+
+            /* Mobile: Single Column Layout - No Panels */
+            .main-container {
+                display: block !important;
+                flex-direction: column !important;
+                width: 100% !important;
+                overflow: visible !important;
+            }
+
+            .left-panel {
+                flex: none !important;
+                width: 100% !important;
+                float: none !important;
+                display: block !important;
+                margin-bottom: 25px;
+                padding: 20px !important;
+                border-right: none !important;
+                background-color: transparent !important;
+                overflow-y: visible !important;
+            }
+
+            .right-panel {
+                flex: none !important;
+                width: 100% !important;
+                float: none !important;
+                display: block !important;
+                padding: 0 !important;
+                background-color: transparent !important;
+                overflow-y: visible !important;
+            }
+
+            /* Force single column - no flexbox ordering needed */
+            .question-section {
+                width: 100% !important;
+                float: none !important;
+                display: block !important;
+                margin-bottom: 20px;
+            }
+
+            .content h2 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            .reading-content {
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 8px;
+                border-left: 4px solid #007bff;
+                margin-bottom: 20px;
+                font-size: 15px;
+                line-height: 1.6;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .question-section {
+                background-color: #ffffff;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 20px;
+                border: 1px solid #e1e5e9;
+            }
+
+            .section-header {
+                background-color: #e8f4fd;
+                padding: 12px 15px;
+                border-radius: 6px;
+                margin-bottom: 20px;
+                font-size: 14px;
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .info-icon {
+                background-color: #007bff;
+                color: white;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: bold;
+                flex-shrink: 0;
+                margin-top: 2px;
+            }
+
+            .response-text {
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 8px;
+                border-left: 4px solid #28a745;
+                margin-top: 20px;
+                font-size: 15px;
+                line-height: 1.8;
+                width: 100%;
+                box-sizing: border-box;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+            }
+
+            .email-container {
+                margin-bottom: 20px;
+                border-radius: 8px;
+                padding: 15px;
+            }
+
+            .email-header {
+                margin-bottom: 10px;
+            }
+
+            .email-header strong {
+                font-size: 14px;
+            }
+
+            .email-body {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+
+            .questions-section h3 {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+
+            .question {
+                margin-bottom: 20px;
+                padding: 15px;
+                border-radius: 8px;
+                background-color: #f8f9fa;
+                border: 1px solid #e9ecef;
+                display: block;
+            }
+
+            .question-number {
+                font-weight: bold;
+                color: #007bff;
+                margin-right: 8px;
+                display: inline;
+            }
+
+            .question-text {
+                font-size: 15px;
+                line-height: 1.5;
+                font-weight: 500;
+                display: inline;
+            }
+
+            /* Create a line break after question text for better mobile layout */
+            .question .question-text:after {
+                content: "";
+                display: block;
+                margin-bottom: 15px;
+            }
+
+            /* Regular question dropdowns - stacked below question text */
+            .dropdown {
+                width: 100%;
+                padding: 12px 15px;
+                font-size: 16px;
+                border-radius: 6px;
+                min-height: 44px;
+                margin-top: 15px;
+                border: 2px solid #ddd;
+                background-color: white;
+                display: block;
+                clear: both;
+            }
+
+            /* Response dropdowns - use desktop styling for mobile too */
+            .blank-dropdown {
+                padding: 2px 6px;
+                border: 1px solid #007bff;
+                border-radius: 3px;
+                background-color: white;
+                margin: 0 2px;
+                min-width: 180px;
+                max-width: 320px;
+                font-size: 14px;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='7,10 12,15 17,10'%3e%3c/polyline%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right 4px center;
+                background-size: 10px;
+                padding-right: 20px;
+            }
+
+            .dropdown:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+            }
+
+            .blank-dropdown:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+            }
+
+            .dropdown option {
+                padding: 8px;
+                font-size: 16px;
+            }
+
+
+
+            .dropdown-group {
+                display: inline-block;
+                margin: 0 2px;
+                vertical-align: baseline;
+            }
+
+            .blank-input {
+                width: 100%;
+                padding: 12px 15px;
+                font-size: 16px;
+                border-radius: 6px;
+                min-height: 44px;
+                border: 2px solid #ddd;
+                margin-top: 8px;
+            }
+
+            .blank-input:focus {
+                border-color: #007bff;
+                outline: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-wrapper {
+                padding: 10px 5px;
+            }
+
+            .test-container {
+                border-radius: 6px;
+            }
+
+            .content {
+                padding: 12px;
+            }
+
+            .content h2 {
+                font-size: 18px;
+            }
+
+            .email-container {
+                padding: 12px;
+            }
+
+            .email-body {
+                font-size: 14px;
+            }
+
+            .questions-section h3 {
+                font-size: 16px;
+            }
+
+            .question {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+
+            .question-text {
+                font-size: 14px;
+            }
+
+            .dropdown, .blank-dropdown, .blank-input {
+                padding: 10px 12px;
+                font-size: 16px;
+                min-height: 42px;
+            }
+
+            .next-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .logo-container {
+                padding: 12px;
+            }
+
+            .logo-container img {
+                max-width: 100px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LOGO -->
+    <div class="logo-container">
+        <img src="Images/True North English Logo 2.0 (400 x 100 px).png" alt="True North English" style="max-width: 200px; height: auto;">
+    </div>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="main-wrapper">
+        <!-- TEST CONTAINER -->
+        <div class="test-container">
+            <!-- HEADER SECTION -->
+            <div class="header">
+                <div class="header-title">Practice Test I - Reading Part 1: Reading Correspondence</div>
+                <div class="timer-next">
+                    <div class="timer" id="timer">Time remaining: 10:00</div>
+                    <button class="next-button" onclick="window.location.href='03_Reading_Part2_Reading_to_Apply_Diagram.html'">NEXT</button>
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT -->
+            <div class="main-container">
+            <!-- LEFT PANEL - READING MESSAGE -->
+            <div class="left-panel">
+                <div class="section-header">
+                    <div class="info-icon">i</div>
+                    Read the following message.
+                </div>
+                <div class="reading-content" id="readingContent">
+                    <!-- =========================================== -->
+                    <!-- EDITABLE SECTION: READING MESSAGE/ARTICLE -->
+                    <!-- =========================================== -->
+                    <!-- Replace the text below with your new message/article -->
+                    Attention: Simon Theroux<br><br>
+
+                    I'm writing regarding a recent incident involving the City of Montreal. On January 3rd, after filling up my car, I returned to my residence around 10:30 p.m. and inadvertently parked near an orange "No Parking" sign. It was quite hard to see this sign as it was covered in blowing snow. I carried one bag of groceries to my apartment and when I came back for the second bag, I discovered that my unlocked vehicle was gone.<br><br>
+
+                    I checked your website and it said that cars were being towed to a lot at the end of Henri-Bourassa Street to make way for snow removal trucks. The next day, I took a $3 bus ride to the stated address, but my car was not there. I called the City and Customer Service Representative Viviane Belanger was able to finally solve the mystery. It turned out that it had been necessary to establish a secondary lot in order to accommodate all of the cars that needed to be towed. Unfortunately, the website had not been updated to include the second address. Thus, visitors to the website only saw information related to the primary lot.<br><br>
+
+                    Once I obtained the address of the secondary lot, I set off to find my car. It was snowing again and -32°C. I waited for over half an hour for another bus, paid the driver another $3, and headed two kilometres in the opposite direction. Twenty minutes later, I found my car at the other address, its wheels stuck in snow, its exterior covered with grime, and its windshield displaying a $115 towing bill. To make matters worse, someone managed to steal $80 worth of my gasoline, presumably by siphoning it out of the fuel tank.<br><br>
+
+                    The fine is due tomorrow. I've tried repeatedly to pay it online but always receive a message saying the information hasn't been entered into your system. I don't dispute the charges, but I just want to confirm that I should pay the invoice in spite of the mistakes made by the City.<br><br>
+
+                    Sincerely,<br>
+                    Fatima Djaout
+                    <!-- =========================================== -->
+                    <!-- END OF EDITABLE SECTION -->
+                    <!-- =========================================== -->
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL - QUESTIONS -->
+            <div class="right-panel">
+                <!-- SECTION 1: DROPDOWN SELECTION QUESTIONS -->
+                <div class="question-section">
+                    <div class="section-header">
+                        <div class="info-icon">i</div>
+                        Using the drop-down menu (▾), choose the best option according to the information given in the message.
+                    </div>
+                    
+                    <!-- =========================================== -->
+                    <!-- EDITABLE SECTION: DROPDOWN SELECTION QUESTIONS -->
+                    <!-- =========================================== -->
+                    <!-- Replace the questions and answers below with your new ones -->
+                    <div class="question">
+                        <span class="question-number">1.</span>
+                        <span class="question-text">Fatima's purpose in writing is</span>
+                        <select class="dropdown" id="q1">
+                            <option value="">&nbsp;</option>
+                            <option value="to explain a late payment.">to explain a late payment.</option>
+                            <option value="to make an apology.">to make an apology.</option>
+                            <option value="to claim compensation.">to claim compensation.</option>
+                            <option value="to seek clarification.">to seek clarification.</option>
+                        </select>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-number">2.</span>
+                        <span class="question-text">Simon Theroux works</span>
+                        <select class="dropdown" id="q2">
+                            <option value="">&nbsp;</option>
+                            <option value="in the city government.">in the city government.</option>
+                            <option value="at a towing company.">at a towing company.</option>
+                            <option value="at a collection agency.">at a collection agency.</option>
+                            <option value="at a police station.">at a police station.</option>
+                        </select>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-number">3.</span>
+                        <span class="question-text">The wrong information was provided by</span>
+                        <select class="dropdown" id="q3">
+                            <option value="">&nbsp;</option>
+                            <option value="the customer service representative.">the customer service representative.</option>
+                            <option value="the recipient of the letter.">the recipient of the letter.</option>
+                            <option value="the municipal government.">the municipal government.</option>
+                            <option value="the bus driver.">the bus driver.</option>
+                        </select>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-number">4.</span>
+                        <span class="question-text">The car disappeared because it was</span>
+                        <select class="dropdown" id="q4">
+                            <option value="">&nbsp;</option>
+                            <option value="blocking a city-owned vehicle.">blocking a city-owned vehicle.</option>
+                            <option value="in an unpaid parking spot.">in an unpaid parking spot.</option>
+                            <option value="stuck in snow with no gas.">stuck in snow with no gas.</option>
+                            <option value="easy for thieves to steal.">easy for thieves to steal.</option>
+                        </select>
+                    </div>
+
+                    <div class="question">
+                        <span class="question-number">5.</span>
+                        <span class="question-text">Fatima's vehicle was</span>
+                        <select class="dropdown" id="q5">
+                            <option value="">&nbsp;</option>
+                            <option value="black.">black.</option>
+                            <option value="empty.">empty.</option>
+                            <option value="dirty.">dirty.</option>
+                            <option value="stolen.">stolen.</option>
+                        </select>
+                    </div>
+
+                    <div class="question">
+                        <div style="margin-bottom: 8px;">
+                            <span class="question-number">6.</span>
+                            <span class="question-text">The mistake involved a misreported</span>
+                        </div>
+                        <select class="dropdown" id="q6">
+                            <option value="">&nbsp;</option>
+                            <option value="location.">location.</option>
+                            <option value="time.">time.</option>
+                            <option value="sign.">sign.</option>
+                            <option value="fee.">fee.</option>
+                        </select>
+                    </div>
+                    <!-- =========================================== -->
+                    <!-- END OF EDITABLE SECTION -->
+                    <!-- =========================================== -->
+                </div>
+
+                <!-- SECTION 2: FILL-IN-THE-BLANKS WITH DROPDOWN OPTIONS -->
+                <div class="question-section">
+                    <div class="section-header">
+                        <div class="info-icon">i</div>
+                        Here is a response to the message. Complete the response by filling in the blanks. Select the best choice for each blank from the drop-down menu (▾).
+                    </div>
+                    
+                    <div class="response-text">
+                        <!-- =========================================== -->
+                        <!-- EDITABLE SECTION: FILL-IN-THE-BLANKS RESPONSE -->
+                        <!-- =========================================== -->
+                        <!-- Replace the response text and dropdown options below with your new ones -->
+                        Dear Ms. Djaout,<br><br>
+                        
+                        Thank you for your message. I can understand how <span class="dropdown-group">7. 
+                        <select class="blank-dropdown" id="q7">
+                            <option value="">&nbsp;</option>
+                            <option value="odd">odd</option>
+                            <option value="interesting">interesting</option>
+                            <option value="frustrating">frustrating</option>
+                            <option value="satisfying">satisfying</option>
+                        </select></span> the situation must be for you. To answer your question, I'm afraid you will still have to <span class="dropdown-group">8. 
+                        <select class="blank-dropdown" id="q8">
+                            <option value="">&nbsp;</option>
+                            <option value="take the bus">take the bus</option>
+                            <option value="find your car">find your car</option>
+                            <option value="pay the fine">pay the fine</option>
+                            <option value="check the website">check the website</option>
+                        </select></span> despite the problems you have experienced. We have had several users report issues related to payment of fines via our website. The need for additional snow removal services has led to an increase in the number of <span class="dropdown-group">9. 
+                        <select class="blank-dropdown" id="q9">
+                            <option value="">&nbsp;</option>
+                            <option value="cars being towed">cars being towed</option>
+                            <option value="visitors to the city of Montreal">visitors to the city of Montreal</option>
+                            <option value="unlocked vehicles">unlocked vehicles</option>
+                            <option value="bus passengers">bus passengers</option>
+                        </select></span> and this in turn has put pressure on our data entry systems. We expect these problems to be resolved by <span class="dropdown-group">10. 
+                        <select class="blank-dropdown" id="q10">
+                            <option value="">&nbsp;</option>
+                            <option value="warmer temperatures and less snowfall">warmer temperatures and less snowfall</option>
+                            <option value="the end of this week">the end of this week</option>
+                            <option value="our customer service representatives">our customer service representatives</option>
+                            <option value="the time you locate your car">the time you locate your car</option>
+                        </select></span>. We are granting <span class="dropdown-group">11. 
+                        <select class="blank-dropdown" id="q11">
+                            <option value="">&nbsp;</option>
+                            <option value="excuses">excuses</option>
+                            <option value="extensions">extensions</option>
+                            <option value="permission">permission</option>
+                            <option value="wishes">wishes</option>
+                        </select></span> for all outstanding tickets until then.<br><br>
+                        
+                        Cordially,<br><br>
+                        
+                        Simon Theroux
+                        <!-- =========================================== -->
+                        <!-- END OF EDITABLE SECTION -->
+                        <!-- =========================================== -->
+                    </div>
+                </div>
+
+                <!-- RESULTS SECTION -->
+                <div class="results" id="results">
+                    <h3>Selected Answers:</h3>
+                    <div id="answerResults"></div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+        // ===========================================
+        // EDITABLE SECTION: TIMER SETTINGS
+        // ===========================================
+        // Change the time limit here (in minutes)
+        let timeLimit = 10;
+        // ===========================================
+        // END OF EDITABLE SECTION
+        // ===========================================
+
+        let timeRemaining = timeLimit * 60; // Convert to seconds
+        const timerElement = document.getElementById('timer');
+
+        // Timer function
+        function updateTimer() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerElement.textContent = `Time remaining: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeRemaining > 0) {
+                timeRemaining--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                timerElement.textContent = "Time's up!";
+            }
+        }
+
+        // Start timer when page loads
+        updateTimer();
+
+        // Load saved answers from localStorage when page loads (disabled for fresh start)
+        function loadSavedAnswers() {
+            // Disabled to ensure fresh start for each test attempt
+            // Previous answers are cleared when starting from the start page
+            console.log('Fresh test - no previous answers loaded');
+        }
+
+        // Load saved answers when page loads and record test start time
+        document.addEventListener('DOMContentLoaded', function() {
+            // Record test start time
+            if (!localStorage.getItem('testStartTime')) {
+                localStorage.setItem('testStartTime', new Date().toISOString());
+            }
+            loadSavedAnswers();
+        });
+
+        // Function to show results
+        function showResults() {
+            const results = document.getElementById('results');
+            const answerResults = document.getElementById('answerResults');
+            
+            let resultsHTML = '';
+            
+            // Get all dropdown answers
+            for (let i = 1; i <= 11; i++) {
+                const dropdown = document.getElementById(`q${i}`);
+                const selectedValue = dropdown.value;
+                resultsHTML += `<p><strong>Question ${i}:</strong> ${selectedValue || 'Not answered'}</p>`;
+            }
+            
+            answerResults.innerHTML = resultsHTML;
+            results.classList.add('show');
+            
+            // Log to console for easy viewing
+            console.log('=== SELECTED ANSWERS ===');
+            for (let i = 1; i <= 11; i++) {
+                const dropdown = document.getElementById(`q${i}`);
+                console.log(`Question ${i}: ${dropdown.value || 'Not answered'}`);
+            }
+            console.log('=======================');
+        }
+
+        // Add event listeners for dropdown changes (optional - for real-time tracking)
+        document.querySelectorAll('.dropdown, .blank-dropdown').forEach(dropdown => {
+            dropdown.addEventListener('change', function() {
+                console.log(`${this.id}: ${this.value}`);
+                
+                // Save answer to localStorage
+                localStorage.setItem(this.id, this.value);
+                
+                // Style the dropdown when an option is selected (for both types)
+                if (this.value !== '') {
+                    this.style.color = '#2d5a2d';
+                    this.style.fontWeight = 'normal';
+                    this.style.backgroundColor = 'white';
+                    this.style.boxShadow = 'none';
+                } else {
+                    this.style.color = '#333';
+                    this.style.fontWeight = 'normal';
+                    this.style.backgroundColor = 'white';
+                    this.style.boxShadow = 'none';
+                }
+            });
+        });
+
+
+
+        // Handle product dropdown change
+        document.getElementById('productDropdown').addEventListener('change', function() {
+            console.log('Selected product:', this.value);
+            // You can add logic here to switch between different practice tests
+            if (this.value === 'practice-test-one') {
+                // Load Practice Test One content
+                console.log('Loading Practice Test One...');
+            } else if (this.value === 'practice-test-two') {
+                // Load Practice Test Two content
+                console.log('Loading Practice Test Two...');
+            }
+        });
+
+        // Handle NEXT button click to navigate to page 2
+        document.addEventListener('DOMContentLoaded', function() {
+            const nextButton = document.querySelector('.next-button');
+            if (nextButton) {
+                nextButton.addEventListener('click', function() {
+                    console.log('NEXT button clicked - navigating to Part 2');
+                    window.location.href = '03_Reading_Part2_Reading_to_Apply_Diagram.html';
+                });
+            } else {
+                console.error('NEXT button not found');
+            }
+        });
+
+
+
+
+    </script>
+</body>
+</html> 
